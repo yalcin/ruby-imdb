@@ -1,12 +1,14 @@
 module IMDB
     class Movie
-    attr_accessor :title, :link, :cast, :id
+    attr_accessor :title, :link, :cast, :id, :poster
 
     def initialize(id)
       @id = id
       @link =  "http://www.imdb.com/title/tt#{id}"
-
       doc = Nokogiri::HTML(open("#{@link}/fullcredits"))
+
+      @title = doc.at("//head/meta[@name='title']")["content"].split(/\(\d+\)/)[0].strip!
+      @poster = doc.at("a[@name='poster'] img")['src'][/http:.+/] + '.jpg' rescue nil
       @cast = []
       doc.search("table.cast tr").map do |link|
         picture = link.children[0].search("img")[0]["src"] rescue nil
