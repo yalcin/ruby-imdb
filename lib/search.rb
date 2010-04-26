@@ -4,7 +4,6 @@ module IMDB
       doc = Nokogiri::HTML(open("http://www.imdb.com/find?s=tt&q=#{CGI.escape(keyword)}"))
       ret_val = []
       doc.search('a[@href^="/title/tt"]').reject { |node|
-          p node
           ret_val.push(IMDB::Result.new(node["href"][/\d+/], node.content, "http://www.imdb.com#{node['href']}"))
         }
       return ret_val

@@ -4,11 +4,10 @@ Bundler.require(:default)
 
 require "cgi"
 require "open-uri"
-require "json"
 
-require "lib/movie"
-require "lib/person"
-require "lib/search"
+require "movie"
+require "person"
+require "search"
 
 #IMDB::Search.movie("fight club").each do
 #  |result|
