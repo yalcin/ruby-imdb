@@ -4,6 +4,7 @@ Bundler.require(:default)
 
 require "cgi"
 require "open-uri"
+require "json"
 
 require "lib/movie"
 require "lib/person"
@@ -20,6 +21,6 @@ require "lib/search"
 #  p movie.poster
 #end
 
-movie = IMDB::Movie.new('0133093')
-p movie.poster
+#movie = IMDB::Movie.new('0133093')
+#p movie.poster
 
