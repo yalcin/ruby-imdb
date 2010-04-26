@@ -1,13 +1,12 @@
-require "rubygems"
 require "bundler"
 Bundler.require(:default)
 
 require "cgi"
 require "open-uri"
 
-require "movie"
-require "person"
-require "search"
+require "imdb/search"
+require "imdb/movie"
+require "imdb/person"
 
 #IMDB::Search.movie("fight club").each do
 #  |result|
