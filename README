@@ -1,0 +1,23 @@
+Installation
+-------------
+[sudo] gem i ruby-imdb
+
+
+example:
+
+require 'rubygems'
+require 'imdb'
+
+IMDB::Search.movie("fear and loathing in las vegas").each do
+  |result|
+  movie = IMDB::Movie.new(result.id)
+  p movie.title
+  movie.cast.each do
+    |cast|
+    p "#{cast.name} as #{cast.char}"
+  end
+  p movie.poster
+end
+
+movie = IMDB::Movie.new('0120669')
+p movie.poster
