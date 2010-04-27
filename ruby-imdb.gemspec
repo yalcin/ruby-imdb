@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Yalcin Acikyildiz"]
-  s.date = %q{2010-04-26}
+  s.date = %q{2010-04-27}
   s.description = %q{Ruby IMDB Parsing Library}
   s.email = %q{yalcin@webliyacelebi.com}
   s.extra_rdoc_files = [
@@ -18,13 +18,14 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".gitignore",
-     "Gemfile",
      "LICENSE",
      "README",
      "Rakefile",
      "VERSION",
+     "features/movie.feature",
      "features/search.feature",
-     "features/step_definitions/imdb_test.rb",
+     "features/step_definitions/movie_steps.rb",
+     "features/step_definitions/search_steps.rb",
      "lib/imdb.rb",
      "lib/imdb/movie.rb",
      "lib/imdb/person.rb",
