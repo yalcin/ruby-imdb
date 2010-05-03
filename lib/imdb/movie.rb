@@ -25,19 +25,15 @@ module IMDB
     end
       
     def photos
-      photo = []
       begin
-        doc.search("img").each do |img|
+        doc.search("img").map do |img|
           unless img["src"][/_CR/].nil?
-            #@photo.push(img["src"])
-            photo.push(img["src"])
+            img["src"]
           end
         end
       rescue 
         nil
       end
-      
-      photo
     end
     
     private
