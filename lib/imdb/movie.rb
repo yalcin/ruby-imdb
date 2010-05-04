@@ -40,9 +40,9 @@ module IMDB
   
     def doc
       if caller[0] =~ /`([^']*)'/ and $1 == "cast"
-        @doc ||= Nokogiri::HTML(open("#{@link}/fullcredits"))
+        @doc = Nokogiri::HTML(open("#{@link}/fullcredits"))
       else
-        @doc ||= Nokogiri::HTML(open("#{@link}"))
+        @doc = Nokogiri::HTML(open("#{@link}"))
       end
       
     end
