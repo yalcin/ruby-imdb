@@ -10,8 +10,10 @@ begin
     s.homepage = "http://github.com/yalcin/ruby-imdb"
     s.authors = ["Yalcin Acikyildiz"]
     s.files =  FileList["[A-Za-z]*", "{lib,features}/**/*", ".gitignore"]
-    s.add_dependency "bundler"
-    s.add_dependency "nokogiri"
+    s.add_dependency "nokogiri", ">= 1.4.1"
+    s.add_dependency "json", ">= 1.4.3"
+    s.add_dependency "mongo", ">= 1.0.1"
+    s.add_dependency "mongo_mapper", ">= 0.7.5"
   end
 rescue LoadError
     puts "Jeweler not available. Install it with: gem install jeweler"

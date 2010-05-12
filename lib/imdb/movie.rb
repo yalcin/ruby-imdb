@@ -1,8 +1,9 @@
 module IMDB
-  class Movie
+  class Movie < IMDB::Skeleton
     attr_accessor :link, :id
 
     def initialize(id)
+      super(:poster, :title, :cast, :photos)
       @id = id
       @link =  "http://www.imdb.com/title/tt#{id}"
     end
@@ -43,9 +44,9 @@ module IMDB
         @doc = Nokogiri::HTML(open("#{@link}/fullcredits"))
       else
         @doc = Nokogiri::HTML(open("#{@link}"))
-      end
-      
+      end      
     end
+    
   end # Movie
 end # IMDB
 
