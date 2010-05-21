@@ -1,3 +1,7 @@
 .bundle
 pkg
 ruby-imdb*.gem
+.idea
+.yardoc
+doc
+
