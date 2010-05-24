@@ -33,10 +33,6 @@ module IMDB
         @picture
       end
 
-      def profile
-        @profile
-      end
-
       def to_s
         "Name: #{@name} \n Char: #{@char} \n"
       end

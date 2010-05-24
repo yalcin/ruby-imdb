@@ -3,10 +3,6 @@ module IMDB
   class Skeleton
     attr_accessor :model, :method_names
 
-    class << self
-      
-    end
-
     def initialize(model_name = "", method_names = {}, keys = [])
       if IMDB::Configuration.caching
         @model = Class.new do
@@ -23,6 +19,7 @@ module IMDB
               alias_method old_meth, meth.to_sym
               define_method meth do
                 k = keys.to_hash { |k| k; self.send(k) }
+
                 @db_query = self.model.first(k)
 
                 if @db_query.nil?
@@ -39,7 +36,7 @@ module IMDB
                       |c|
                       c.to_hash
                     }
-                    @db_query[meth] = a
+                    @db_query[meth] = a 
                   else
                     @db_query[meth] = a
                   end
