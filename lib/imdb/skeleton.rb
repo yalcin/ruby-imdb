@@ -28,14 +28,13 @@ module IMDB
                 end
 
                 if @db_query[meth].nil? or (@db_query[meth].length.zero? if @db_query[meth].kind_of?(Array))
-
                   a = send(old_meth)
                   if a.kind_of?(Array)
                     a.compact!
-                    a.map! { 
-                      |c|
-                      c.to_hash
-                    }
+                    #a.map! { 
+                    #  |c|
+                    #  c.to_hash
+                    #}.compact
                     @db_query[meth] = a 
                   else
                     @db_query[meth] = a

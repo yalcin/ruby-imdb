@@ -1,5 +1,5 @@
 module IMDB
-    class Search
+    class Search < IMDB::Skeleton
     def self.movie(keyword)
       doc = Nokogiri::HTML(open("http://www.imdb.com/find?s=tt&q=#{CGI.escape(keyword)}"))
       ret_val = []
@@ -11,7 +11,7 @@ module IMDB
 
   end # Search
 
-  class Result
+  class Result < IMDB::Skeleton
     attr_accessor :id, :title, :link, :year
 
     def initialize(id, title, link)

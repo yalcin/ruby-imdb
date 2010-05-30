@@ -12,9 +12,9 @@ module IMDB
       super("Movie", {:imdb_id => String,
             :poster => String,
             :title => String,
+            :release_date => String,
             :cast => Array,
             :photos => Array,
-            :release_date => String,
             :director => String,
             :genres => Array,
             :writers => Array}, [:imdb_id])
@@ -51,21 +51,21 @@ module IMDB
     # Get movie photos
     # @return [Array]
     def photos
-      doc.search("img").map { |img|
-        unless img["src"][/_CR/].nil?
-          img["src"]
-        end
-      }.compact
-    rescue
-      nil
-
+      begin
+        doc.search("img").map { |img|
+          unless img["src"][/_CR/].nil?
+            img["src"]
+          end
+        }
+      rescue
+        nil
+      end
     end
 
     # Get release date
     # @return [String]
     def release_date
-      Date.parse(Chronic.parse(doc.xpath("//h5[contains(., 'Release Date')]/..").first.content[/^\d{1,2} \w+ \d{4}/]).strftime('%Y/%m/%d'))
-      rescue nil
+      Date.parse(Chronic.parse(doc.xpath("//h5[contains(., 'Release Date')]/..").first.content[/^\d{1,2} \w+ \d{4}/]).strftime('%Y/%m/%d')).to_s rescue nil
     end
 
     # Get Director
@@ -90,7 +90,7 @@ module IMDB
       doc.xpath("//a[@name='writers']/../../../..").search('a[@href^="/name/nm"]').map {|w|
         name = w.content
         profile = w['href']
-        IMDB::Person.new(@imdb_id, name, nil, profile, nil)
+        IMDB::Person.new(@imdb_id, name, "nil", profile, "nil")
       }
     end
 
