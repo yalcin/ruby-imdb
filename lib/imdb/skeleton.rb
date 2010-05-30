@@ -1,5 +1,5 @@
 module IMDB
-  # Interface of IMDB data classes.
+  # IMDB generic interface.
   class Skeleton
     attr_accessor :model, :method_names
 
@@ -9,8 +9,8 @@ module IMDB
           include MongoMapper::Document
           set_collection_name model_name
           method_names.each { |m, t|
-          key m, t
-        }
+            key m, t
+          }
         end
         class_eval do
           method_names.each_key { |meth|
@@ -31,11 +31,14 @@ module IMDB
                   a = send(old_meth)
                   if a.kind_of?(Array)
                     a.compact!
-                    #a.map! { 
-                    #  |c|
-                    #  c.to_hash
-                    #}.compact
-                    @db_query[meth] = a 
+                    a.map! { |c|
+                      if c.kind_of?(String)
+                        c
+                      else
+                        c.to_hash
+                      end
+                    }
+                    @db_query[meth] = a
                   else
                     @db_query[meth] = a
                   end
@@ -57,7 +60,6 @@ module IMDB
       tmp_hash.to_json(*a)
     end
 
-
     def to_hash(*a)
       tmp_hash = {}
       @method_names.each_key { |x|
@@ -78,3 +80,4 @@ module IMDB
     end
   end
 end
+
