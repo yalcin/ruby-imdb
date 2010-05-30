@@ -28,7 +28,8 @@ IMDB::Configuration.db(:hostname => "localhost", :database => "imdb")
 require 'rubygems'
 require 'imdb'
 
-IMDB::Search.movie("fear and loathing in las vegas").each do
+s = IMDB::Search.new
+s.movie("fear and loathing in las vegas").each do
   |result|
   movie = IMDB::Movie.new(result.id)
   p movie.title
@@ -44,10 +45,11 @@ p movie.poster
 
 == Examples
 
-Under the features directory
+Are Under features directory
 
 == Authors
  * Yalcin ACIKYILDIZ (mailto:yalcin@webliyacelebi.com)
 
 
 This library is released under the terms of the GNU/GPL.
+
