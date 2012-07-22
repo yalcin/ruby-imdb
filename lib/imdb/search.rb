@@ -48,7 +48,10 @@ module IMDB
 
   class Result < IMDB::Skeleton
     def initialize(imdb_id, title, link, extra="")
-      super("Result",{:title => String, :link => String, :imdb_id => String, :extra => extra}, [:imdb_id])
+      super("Result",{
+        :title => String,
+        :link => String,
+        :imdb_id => String}, [:imdb_id])
       @title   = title
       @link    = link
       @imdb_id = imdb_id
