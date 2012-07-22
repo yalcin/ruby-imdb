@@ -16,3 +16,9 @@ end
 Then /the result should be equal or greater than (\d+)/ do |result|
   @result.length.should >= result.to_i
 end
+Then /the result should be equal to (\d+)/ do |result|
+  @result.length.should == result.to_i
+end
+Then /the first title should be "(.*)"/ do |title|
+  @result.first.title.should == title
+end
