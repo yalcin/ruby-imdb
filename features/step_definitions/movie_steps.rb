@@ -10,11 +10,11 @@ After do
 end
 
 Given /I have movie name called "(.*)"/ do |n|
-  @result = IMDB::Search.movie(n.to_s)
+  @result = IMDB::Search.new.movie(n.to_s)
 end
 
 When /I get first entry from result set/ do
-  @movie = IMDB::Movie.new(@result[0].id)
+  @movie = IMDB::Movie.new(@result[0].imdb_id)
 end
 
 Then /^"(.*?)" should be act as "(.*?)"$/ do |person, act_as|

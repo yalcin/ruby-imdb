@@ -45,7 +45,7 @@ module IMDB
         profile_id = link.children[1].search('a[@href^="/name/nm"]').first["href"] rescue nil
         char = link.children[3].content.strip rescue nil
         IMDB::Person.new(@imdb_id, name, char, profile_id, picture) unless name.nil? and char.nil? and picture.nil? and profile_id.nil?
-      end
+      end.compact
     end
 
     # Get movie photos

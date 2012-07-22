@@ -10,7 +10,7 @@ After do
 end
 
 Given /I have keyword "(.*)" for the search/ do |n|
-  @result = IMDB::Search.movie(n.to_s)
+  @result = IMDB::Search.new.movie(n.to_s)
 end
 
 Then /the result should be equal or greater than (\d+)/ do |result|
