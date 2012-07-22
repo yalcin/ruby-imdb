@@ -16,7 +16,7 @@ module IMDB
             :photos => Array,
             :director => String,
             :genres => Array,
-            :rating => Fixnum,
+            :rating => Float,
             :short_description => String,
             :writers => Array}, [:imdb_id])
 
@@ -96,7 +96,7 @@ module IMDB
     end
 
     # Writer List
-    # @return [Fixnum]
+    # @return [Float]
     def rating
       @rating ||= doc.search(".star-box-giga-star").text.strip.to_f
     rescue

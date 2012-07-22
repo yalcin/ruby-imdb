@@ -19,6 +19,7 @@ Feature: Get movie information
     Given I have movie name called "Dr. Horrible's Sing-Along Blog"
     When I get first entry from result set
     Then the release year should be 2008
+    And the title should be "Dr. Horrible's Sing-Along Blog"
   Scenario: Title of minor movies is different
     Given I have movie name called "Kunpan: Legend of the Warlord"
     When I get first entry from result set
