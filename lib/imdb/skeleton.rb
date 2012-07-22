@@ -18,12 +18,12 @@ module IMDB
               old_meth = "old_#{meth}".to_sym
               alias_method old_meth, meth.to_sym
               define_method meth do
-                k = keys.to_hash { |k| k; self.send(k) }
+                k = keys.to_imdb_hash { |k| k; self.send(k) }
 
                 @db_query = self.model.first(k)
 
                 if @db_query.nil?
-                  @db_query = self.model.new(keys.to_hash { |k| k; self.send(k)})
+                  @db_query = self.model.new(keys.to_imdb_hash { |k| k; self.send(k)})
                   @db_query.save
                 end
 
