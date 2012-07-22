@@ -18,6 +18,7 @@ module IMDB
             :director => String,
             :genres => Array,
             :rating => Fixnum,
+            :short_description => String,
             :writers => Array}, [:imdb_id])
 
       @imdb_id = id_of
@@ -85,6 +86,8 @@ module IMDB
         nil
     end
 
+    # Writer List
+    # @return [Fixnum]
     def rating
       @rating ||= doc.search(".star-box-giga-star").text.strip.to_f
     rescue
@@ -99,6 +102,11 @@ module IMDB
         profile = w['href']
         IMDB::Person.new(@imdb_id, name, "nil", profile, "nil")
       }
+    end
+
+    # @return [String]
+    def short_description
+      doc.at("#overview-top p[itemprop=description]").text.strip
     end
 
     private

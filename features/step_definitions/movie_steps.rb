@@ -60,5 +60,10 @@ Then /^the writers should be "(.*?)"$/ do |arg1|
   @movie.writers.map{|i|i.name}.join(", ").should == arg1
 end
 
+Then /^the short_description should be "(.*?)"$/ do |arg1|
+  @movie.short_description.should == arg1
+end
+
+
 
 
