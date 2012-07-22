@@ -14,5 +14,9 @@ Feature: Get movie information
   Scenario: Partial date: Some movies have not a full date
     Given I have movie name called "Russian Roulette"
     When I get first entry from result set
-    And the release year should be 2010
+    Then the release year should be 2010
+  Scenario: Title of minor movies is different
+    Given I have movie name called "Kunpan: Legend of the Warlord"
+    When I get first entry from result set
+    Then the title should be "Kun pan"
 

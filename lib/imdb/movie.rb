@@ -6,7 +6,6 @@ module IMDB
   class Movie < IMDB::Skeleton
     attr_accessor :link, :imdb_id
 
-
     def initialize(id_of)
       # !!!DON'T FORGET DEFINE NEW METHODS IN SUPER!!!
       super("Movie", {:imdb_id => String,
@@ -35,7 +34,9 @@ module IMDB
     # Get movie title
     # @return [String]
     def title
-      doc.at("//head/meta[@name='title']")["content"].split(/\(\d+\)/)[0].strip!
+      doc.at("//head/meta[@name='title']")["content"].split(/\(\d+\)/)[0].strip! ||
+        doc.at("h1.header").children.first.text.strip
+
     end
 
     # Get movie cast listing

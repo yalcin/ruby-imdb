@@ -64,6 +64,10 @@ Then /^the short_description should be "(.*?)"$/ do |arg1|
   @movie.short_description.should == arg1
 end
 
+Then /^the title should be "(.*)"$/ do |title|
+  @movie.title.should == title
+end
+
 
 
 

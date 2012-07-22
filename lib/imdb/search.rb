@@ -36,7 +36,10 @@ module IMDB
     def result_list(doc)
       @ret_val = doc.search('a[@href^="/title/tt"]').reduce([]) do |ret_val,node|
         unless node.content.blank?
-          ret_val.push(IMDB::Result.new(node["href"][/\d+/], node.content, "http://www.imdb.com#{node['href']}"))
+          link =  "http://www.imdb.com#{node['href']}"
+          id   = node["href"][/\d+/]
+          subtitle = node.parent.parent.content
+          ret_val << IMDB::Result.new(id, node.parent.content, link, subtitle)
         end
         ret_val
       end
@@ -44,11 +47,12 @@ module IMDB
   end # Search
 
   class Result < IMDB::Skeleton
-    def initialize(imdb_id, title, link)
-      super("Result",{:title => String, :link => String, :imdb_id => String}, [:imdb_id])
-      @title = title
-      @link = link
+    def initialize(imdb_id, title, link, extra="")
+      super("Result",{:title => String, :link => String, :imdb_id => String, :extra => extra}, [:imdb_id])
+      @title   = title
+      @link    = link
       @imdb_id = imdb_id
+      @extra   = extra
     end
 
     def title
@@ -65,6 +69,10 @@ module IMDB
 
     def movie
       Movie.new(@imdb_id)
+    end
+
+    def extra
+      @extra
     end
   end
 end
