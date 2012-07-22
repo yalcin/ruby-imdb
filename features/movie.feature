@@ -6,3 +6,7 @@ Feature: Get movie information
     And the genres should be "Adventure, Drama"
     And the rating should be a number between 0 and 10
     And the release year should be 1998
+    And the poster should be a link to an image
+    And the director should be "Terry Gilliam"
+    And it should have many photos
+    And the writers should be "Hunter S. Thompson, Terry Gilliam, Tony Grisoni, Tod Davies, Alex Cox"

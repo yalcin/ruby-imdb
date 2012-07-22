@@ -17,6 +17,7 @@ module IMDB
             :photos => Array,
             :director => String,
             :genres => Array,
+            :rating => Fixnum,
             :writers => Array}, [:imdb_id])
 
       @imdb_id = id_of
@@ -27,7 +28,7 @@ module IMDB
     # Get movie poster address
     # @return [String]
     def poster
-      doc.at("a[@name='poster'] img")['src'][/http:.+/] + '.jpg' rescue nil
+      doc.at("#img_primary img")["src"]
     end
 
     # Get movie title
@@ -52,22 +53,18 @@ module IMDB
     # @return [Array]
     def photos
       begin
-        doc.search("img").map { |img|
-          unless img["src"][/_CR/].nil?
-            img["src"]
-          end
-        }
+        doc.search("#title-overview-widget .mediastrip img").map{|i|i["src"]}
       rescue
         nil
       end
     end
 
     # Get release date
-    # @return [Date]
+    # @return [String]
     def release_date
       date = doc.xpath("//h4[contains(., 'Release Date')]/..").
         search("time").first["datetime"]
-      Date.parse(date)
+      Date.parse(date).to_s
     rescue
       nil
     end
@@ -75,7 +72,7 @@ module IMDB
     # Get Director
     # @return [String]
     def director
-      doc.xpath("//h5[contains(., 'Director')]/..").at("a").content rescue nil
+      doc.xpath("//h4[contains(., 'Director')]/..").at("a").content rescue nil
     end
 
     # Genre List

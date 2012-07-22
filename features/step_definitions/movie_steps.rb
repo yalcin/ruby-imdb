@@ -35,5 +35,30 @@ Then /^the rating should be a number between (\d+) and (\d+)$/ do |min,max|
 end
 
 Then /the release year should be (\d+)/ do |year|
-  @movie.release_date.year.should == year.to_i
+  Date.parse(@movie.release_date).year.should == year.to_i
+
 end
+
+Then /^the poster should be a link to an image$/ do
+  @movie.poster.should be_kind_of String
+  @movie.poster.should =~ /^http:.*jpg$/
+end
+
+
+Then /^the director should be "(.*?)"$/ do |arg1|
+  @movie.director.should == arg1
+end
+
+Then /^it should have many photos$/ do
+  @movie.photos.count.should > 3
+  @movie.photos.each do |photo|
+    photo.should =~ /^http:.*jpg$/
+  end
+end
+
+Then /^the writers should be "(.*?)"$/ do |arg1|
+  @movie.writers.map{|i|i.name}.join(", ").should == arg1
+end
+
+
+
