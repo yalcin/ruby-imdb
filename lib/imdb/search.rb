@@ -38,8 +38,7 @@ module IMDB
         unless node.content.blank?
           link =  "http://www.imdb.com#{node['href']}"
           id   = node["href"][/\d+/]
-          subtitle = node.parent.parent.content
-          ret_val << IMDB::Result.new(id, node.content, link, subtitle)
+          ret_val << IMDB::Result.new(id, node.content, link)
         end
         ret_val
       end
@@ -47,7 +46,7 @@ module IMDB
   end # Search
 
   class Result < IMDB::Skeleton
-    def initialize(imdb_id, title, link, extra="")
+    def initialize(imdb_id, title, link)
       super("Result",{
         :title => String,
         :link => String,
@@ -55,7 +54,6 @@ module IMDB
       @title   = title
       @link    = link
       @imdb_id = imdb_id
-      @extra   = extra
     end
 
     def title
@@ -74,9 +72,6 @@ module IMDB
       Movie.new(@imdb_id)
     end
 
-    def extra
-      @extra
-    end
   end
 end
 
