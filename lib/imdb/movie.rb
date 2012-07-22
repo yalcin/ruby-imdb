@@ -64,12 +64,16 @@ module IMDB
     # Get release date
     # @return [String]
     def release_date
-      date = doc.xpath("//h4[contains(., 'Release Date')]/..").
-        search("time").first["datetime"]
-      if date.match /^\d{4}$/
-        "#{date}-01-01"
+      if (node = doc.xpath("//h4[contains(., 'Release Date')]/..")).length > 0
+        date = node.search("time").first["datetime"]
+        if date.match /^\d{4}$/
+          "#{date}-01-01"
+        else
+          Date.parse(date).to_s
+        end
       else
-        Date.parse(date).to_s
+        year = doc.at("h1.header .nobr").text[/\d{4}/]
+         "#{year}-01-01"
       end
     rescue
       nil
