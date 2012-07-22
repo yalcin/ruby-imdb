@@ -24,3 +24,16 @@ Then /^"(.*?)" should be act as "(.*?)"$/ do |person, act_as|
     end
   end
 end
+
+Then /^the genres should be "(.*?)"$/ do |arg1|
+  @movie.genres.should == arg1.split(/, */)
+end
+
+Then /^the rating should be a number between (\d+) and (\d+)$/ do |min,max|
+  @movie.rating.should be_kind_of Numeric
+  (min.to_f...max.to_f).should include @movie.rating
+end
+
+Then /the release year should be (\d+)/ do |year|
+  @movie.release_date.year.should == year.to_i
+end

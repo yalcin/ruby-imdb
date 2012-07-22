@@ -4,3 +4,5 @@ Feature: Get movie information
     When I get first entry from result set
     Then "Johnny Depp" should be act as "Raoul Duke"
     And the genres should be "Adventure, Drama"
+    And the rating should be a number between 0 and 10
+    And the release year should be 1998

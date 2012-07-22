@@ -63,9 +63,13 @@ module IMDB
     end
 
     # Get release date
-    # @return [String]
+    # @return [Date]
     def release_date
-      Date.parse(Chronic.parse(doc.xpath("//h5[contains(., 'Release Date')]/..").first.content[/^\d{1,2} \w+ \d{4}/]).strftime('%Y/%m/%d')).to_s rescue nil
+      date = doc.xpath("//h4[contains(., 'Release Date')]/..").
+        search("time").first["datetime"]
+      Date.parse(date)
+    rescue
+      nil
     end
 
     # Get Director
@@ -77,11 +81,17 @@ module IMDB
     # Genre List
     # @return [Array]
     def genres
-      doc.xpath("//h5[contains(., 'Genre')]/..").search("a").map { |g|
+      doc.xpath("//h4[contains(., 'Genre')]/..").search("a").map { |g|
         g.content unless g.content =~ /See more/
         }.compact
       rescue
         nil
+    end
+
+    def rating
+      @rating ||= doc.search(".star-box-giga-star").text.strip.to_f
+    rescue
+      nil
     end
 
     # Writer List
