@@ -39,7 +39,7 @@ module IMDB
           link =  "http://www.imdb.com#{node['href']}"
           id   = node["href"][/\d+/]
           subtitle = node.parent.parent.content
-          ret_val << IMDB::Result.new(id, node.parent.content, link, subtitle)
+          ret_val << IMDB::Result.new(id, node.content, link, subtitle)
         end
         ret_val
       end
