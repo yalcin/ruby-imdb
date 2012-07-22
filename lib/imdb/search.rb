@@ -3,7 +3,7 @@ module IMDB
     def movie(keyword)
       doc = Nokogiri::HTML(open("http://www.imdb.com/find?s=tt&q=#{CGI.escape(keyword)}"))
       @ret_val = []
-      if doc.at("h1.header")
+      if doc.at("h1.header")   # we're already being redirected to movie's page
         single_result(doc)
       else
         result_list(doc)
