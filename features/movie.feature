@@ -5,7 +5,7 @@ Feature: Get movie information
     Then "Johnny Depp" should be act as "Raoul Duke"
     And the genres should be "Adventure, Drama"
     And the rating should be a number between 0 and 10
-    And the release year should be 1998
+    And the release year should be 1999
     And the poster should be a link to an image
     And the director should be "Terry Gilliam"
     And it should have many photos
