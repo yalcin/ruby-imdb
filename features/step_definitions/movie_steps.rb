@@ -68,6 +68,10 @@ Then /^the title should be "(.*)"$/ do |title|
   @movie.title.should == title
 end
 
+Then /^the poster should be "(.*)"$/ do |poster|
+  @movie.poster.should == poster
+end
+
 
 
 

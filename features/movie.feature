@@ -24,4 +24,9 @@ Feature: Get movie information
     Given I have movie name called "Kunpan: Legend of the Warlord"
     When I get first entry from result set
     Then the title should be "Kun pan"
+  Scenario: Whant Original Poster
+    Given I have movie name called "L'era glaciale 3 - L'alba dei dinosauri"
+    When I get first entry from result set
+    Then the poster should be a link to an image
+    And the poster should be "http://ia.media-imdb.com/images/M/MV5BMjA4NDI0Mjg4NV5BMl5BanBnXkFtZTcwOTM1NTY0Mg@@.jpg"
 
