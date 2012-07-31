@@ -72,6 +72,11 @@ Then /^the poster should be "(.*)"$/ do |poster|
   @movie.poster.should == poster
 end
 
+Then /^the movielength should be "(.*)"$/ do |duration|
+  @movie.movielength.should be_kind_of Integer
+  @movie.movielength.should == duration.to_i
+end
+
 
 
 

@@ -17,6 +17,7 @@ module IMDB
             :director => String,
             :genres => Array,
             :rating => Float,
+            :movielength => Integer,
             :short_description => String,
             :writers => Array}, [:imdb_id])
 
@@ -106,6 +107,12 @@ module IMDB
       @rating ||= doc.search(".star-box-giga-star").text.strip.to_f
     rescue
       nil
+    end
+
+    #Get the movielength of the movie in minutes
+    # @return [Integer]
+    def movielength
+     doc.at("//h4[text()='Runtime:']/..").inner_html[/\d+ min/].to_i rescue nil
     end
 
     # Writer List

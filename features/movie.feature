@@ -11,6 +11,7 @@ Feature: Get movie information
     And it should have many photos
     And the writers should be "Hunter S. Thompson, Terry Gilliam, Tony Grisoni, Tod Davies, Alex Cox"
     And the short_description should be "An oddball journalist and his psychopathic lawyer travel to Las Vegas for a series of psychadelic escapades."
+    And the movielength should be "118"
   Scenario: Partial date: Some movies have not a full date
     Given I have movie name called "Russian Roulette"
     When I get first entry from result set
