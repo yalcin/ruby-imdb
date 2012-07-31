@@ -29,12 +29,15 @@ module IMDB
     # Get movie poster address
     # @return [String]
     def poster
-      src = doc.at("#img_primary img")["src"]
-      if src.match(/\._V1/)
-        src.match(/(.*)\._V1.*(.jpg)/)[1, 2].join
-      else
-        src
+      src = doc.at("#img_primary img")["src"] rescue nil
+      unless src.nil?
+        if src.match(/\._V1/)
+          return src.match(/(.*)\._V1.*(.jpg)/)[1, 2].join
+        else
+          return src
+        end
       end
+      src
     end
 
     # Get movie title
