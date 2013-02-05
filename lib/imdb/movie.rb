@@ -65,7 +65,7 @@ module IMDB
     # @return [String]
     def release_date
       if (node = doc.xpath("//h4[contains(., 'Release Date')]/..")).length > 0
-        date = node.children[2]
+        date = node.children[2].text.match(/([\w\d ]+)/)[0]
         if date.match /^\d{4}$/
           "#{date}-01-01"
         else
