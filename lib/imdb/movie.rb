@@ -55,7 +55,7 @@ module IMDB
     # @return [Array]
     def photos
       begin
-        doc.search("#title-overview-widget .mediastrip img").map{|i|i["src"]}
+        doc.search("#title-overview-widget .image img").map{|i|i["src"]}
       rescue
         nil
       end
@@ -65,7 +65,7 @@ module IMDB
     # @return [String]
     def release_date
       if (node = doc.xpath("//h4[contains(., 'Release Date')]/..")).length > 0
-        date = node.search("time").first["datetime"]
+        date = node.children[2]
         if date.match /^\d{4}$/
           "#{date}-01-01"
         else
