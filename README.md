@@ -10,12 +10,13 @@ Features
 - Object Oriented design
 - Fast access to data
 
-Download
+Installation
 --------
 
-- [sudo] gem i ruby-imdb
-- http://github.com/yalcin/ruby-imdb
-- git clone git://github.com/yalcin/ruby-imdb.git
+Ruby IMDB is available as a Ruby Gem.
+
+
+    [sudo] gem i ruby-imdb
 
 
 Enable caching
@@ -51,6 +52,17 @@ Examples
 --------
 
 Are Under features directory
+
+Contribution
+------------
+
+All PRs and feature requests are welcome.
+
+Clone the repo
+
+    git clone git://github.com/yalcin/ruby-imdb.git
+
+And open a PR.
 
 Authors
 -------
