@@ -17,6 +17,7 @@ module IMDB
             :director => String,
             :genres => Array,
             :rating => Float,
+            :movielength => Integer,
             :short_description => String,
             :writers => Array}, [:imdb_id])
 
@@ -28,7 +29,15 @@ module IMDB
     # Get movie poster address
     # @return [String]
     def poster
-      doc.at("#img_primary img")["src"]
+      src = doc.at("#img_primary img")["src"] rescue nil
+      unless src.nil?
+        if src.match(/\._V1/)
+          return src.match(/(.*)\._V1.*(.jpg)/)[1, 2].join
+        else
+          return src
+        end
+      end
+      src
     end
 
     # Get movie title
@@ -101,6 +110,12 @@ module IMDB
       @rating ||= doc.search(".star-box-giga-star").text.strip.to_f
     rescue
       nil
+    end
+
+    #Get the movielength of the movie in minutes
+    # @return [Integer]
+    def movielength
+     doc.at("//h4[text()='Runtime:']/..").inner_html[/\d+ min/].to_i rescue nil
     end
 
     # Writer List
